@@ -1,7 +1,7 @@
 # Japanese Village VR — *Festival of Eternal Light*
 
 <p align="center">
-  <img src="./Assets/Images/japanese_village_banner.png" width="720" alt="Japanese Village VR Preview">
+  <img src="/Assets/Images/japanese_village_banner.png" width="720" alt="Japanese Village VR Preview">
 </p>
 <p align="center">
   <strong>An immersive VR-like interactive environment built with Unity</strong><br>
