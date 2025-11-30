@@ -3,7 +3,6 @@
 <p align="center">
   <img src="Assets/Images/japanese_village_banner.png" width="720" alt="Japanese Village VR Preview">
 </p>
-
 <p align="center">
   <strong>An immersive VR-like interactive environment built with Unity</strong><br>
   Explore a stylized Japanese village and restore the sacred Festival of Eternal Light
