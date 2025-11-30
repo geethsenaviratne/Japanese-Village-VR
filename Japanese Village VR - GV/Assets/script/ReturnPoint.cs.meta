@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 55d07018b42046b45a99bb612c18d40d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - messageText: {instanceID: 0}
+  - blade: {instanceID: 0}
+  - lanternsParent: {instanceID: 0}
+  - groundLanternsParent: {instanceID: 0}
+  - house1: {instanceID: 0}
+  - box001: {instanceID: 0}
+  - streetlightsParent: {instanceID: 0}
+  - audioSource: {instanceID: 0}
+  - bladeReturnSound: {fileID: 8300000, guid: 15e235351ec7eea41a637a77f86eeeb2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

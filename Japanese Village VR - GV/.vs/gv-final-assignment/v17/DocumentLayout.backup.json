@@ -1,0 +1,183 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\UnityHub\\GV\\gv-final-assignment\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|e:\\unityhub\\gv\\gv-final-assignment\\assets\\script\\flagwind.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\flagwind.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|e:\\unityhub\\gv\\gv-final-assignment\\assets\\script\\returnpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\returnpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|E:\\UnityHub\\GV\\gv-final-assignment\\assets\\script\\interactivestatue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\interactivestatue.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|E:\\UnityHub\\GV\\gv-final-assignment\\assets\\script\\interactivelantern.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\interactivelantern.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|E:\\UnityHub\\GV\\gv-final-assignment\\assets\\script\\interactivebook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\interactivebook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|E:\\UnityHub\\GV\\gv-final-assignment\\assets\\script\\bladepickup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\bladepickup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|E:\\UnityHub\\GV\\gv-final-assignment\\assets\\script\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\playermovement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\UnityHub\\GV\\gv-final-assignment\\Library\\PackageCache\\com.unity.render-pipelines.universal@e6a37f17fabd\\Shaders\\Lit.shader||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Library\\PackageCache\\com.unity.render-pipelines.universal@e6a37f17fabd\\Shaders\\Lit.shader||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|E:\\UnityHub\\GV\\gv-final-assignment\\assets\\script\\rotateblade2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\rotateblade2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|E:\\UnityHub\\GV\\gv-final-assignment\\assets\\script\\rotateblade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9C39790D-8A88-451E-4104-E4D9818AA399}|Assembly-CSharp.csproj|solutionrelative:assets\\script\\rotateblade.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FlagWind.cs",
+              "DocumentMoniker": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\FlagWind.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\FlagWind.cs",
+              "ToolTip": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\FlagWind.cs",
+              "RelativeToolTip": "Assets\\script\\FlagWind.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAF0AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T16:37:59.029Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "InteractiveStatue.cs",
+              "DocumentMoniker": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\InteractiveStatue.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\InteractiveStatue.cs",
+              "ToolTip": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\InteractiveStatue.cs",
+              "RelativeToolTip": "Assets\\script\\InteractiveStatue.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAqwD0AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T15:27:43.948Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "InteractiveBook.cs",
+              "DocumentMoniker": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\InteractiveBook.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\InteractiveBook.cs",
+              "ToolTip": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\InteractiveBook.cs",
+              "RelativeToolTip": "Assets\\script\\InteractiveBook.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAUwE8AAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T12:53:47.969Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "InteractiveLantern.cs",
+              "DocumentMoniker": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\InteractiveLantern.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\InteractiveLantern.cs",
+              "ToolTip": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\InteractiveLantern.cs",
+              "RelativeToolTip": "Assets\\script\\InteractiveLantern.cs",
+              "ViewState": "AgIAACQBAAAAAAAAAAAiwE4BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-26T11:19:35.868Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Lit.shader",
+              "DocumentMoniker": "E:\\UnityHub\\GV\\gv-final-assignment\\Library\\PackageCache\\com.unity.render-pipelines.universal@e6a37f17fabd\\Shaders\\Lit.shader",
+              "RelativeDocumentMoniker": "Library\\PackageCache\\com.unity.render-pipelines.universal@e6a37f17fabd\\Shaders\\Lit.shader",
+              "ToolTip": "E:\\UnityHub\\GV\\gv-final-assignment\\Library\\PackageCache\\com.unity.render-pipelines.universal@e6a37f17fabd\\Shaders\\Lit.shader",
+              "RelativeToolTip": "Library\\PackageCache\\com.unity.render-pipelines.universal@e6a37f17fabd\\Shaders\\Lit.shader",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002777|",
+              "WhenOpened": "2025-11-25T22:46:31.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BladePickup.cs",
+              "DocumentMoniker": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\BladePickup.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\BladePickup.cs",
+              "ToolTip": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\BladePickup.cs",
+              "RelativeToolTip": "Assets\\script\\BladePickup.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMkAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T21:51:17.128Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReturnPoint.cs",
+              "DocumentMoniker": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\ReturnPoint.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\ReturnPoint.cs",
+              "ToolTip": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\ReturnPoint.cs",
+              "RelativeToolTip": "Assets\\script\\ReturnPoint.cs",
+              "ViewState": "AgIAAJ0CAAAAAAAAAAAgwPQCAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T21:30:57.866Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "RotateBlade2.cs",
+              "DocumentMoniker": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\RotateBlade2.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\RotateBlade2.cs",
+              "ToolTip": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\RotateBlade2.cs",
+              "RelativeToolTip": "Assets\\script\\RotateBlade2.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T20:45:24.447Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RotateBlade.cs",
+              "DocumentMoniker": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\RotateBlade.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\RotateBlade.cs",
+              "ToolTip": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\RotateBlade.cs",
+              "RelativeToolTip": "Assets\\script\\RotateBlade.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T20:12:12.849Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PlayerMovement.cs",
+              "DocumentMoniker": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\PlayerMovement.cs",
+              "RelativeDocumentMoniker": "Assets\\script\\PlayerMovement.cs",
+              "ToolTip": "E:\\UnityHub\\GV\\gv-final-assignment\\Assets\\script\\PlayerMovement.cs",
+              "RelativeToolTip": "Assets\\script\\PlayerMovement.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAUwHcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T17:29:31.788Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

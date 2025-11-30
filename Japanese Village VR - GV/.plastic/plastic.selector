@@ -1,0 +1,3 @@
+repository "gv-final-assignment/gv-final-assignment@18968352427021@cloud"
+  path "/"
+    smartbranch "/main/helindu"

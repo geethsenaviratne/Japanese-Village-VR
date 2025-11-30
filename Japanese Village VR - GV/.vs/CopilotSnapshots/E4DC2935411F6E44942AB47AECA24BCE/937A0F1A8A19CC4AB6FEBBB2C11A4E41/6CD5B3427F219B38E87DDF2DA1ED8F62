@@ -1,0 +1,770 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class ReturnPoint : MonoBehaviour
+{
+    [Header("References")]
+    public TextMeshProUGUI messageText;
+    public GameObject blade;
+    public GameObject lanternsParent; // Paper lanterns (PAperLantern)
+    public GameObject groundLanternsParent; // Ground/stair lanterns (Lantern)
+    public GameObject house1;
+    public GameObject box001; // NEW: Box001 with windows
+    public GameObject streetlightsParent;
+
+    [Header("Settings")]
+    public KeyCode returnKey = KeyCode.E;
+    public float detectionRadius = 3f;
+
+    [Header("Window Settings")]
+    public Color windowGlowColor = new Color(1f, 0.9f, 0.7f);
+    public float windowGlowIntensity = 2f;
+
+    [Header("Streetlight Settings")]
+    public Color streetlightColor = Color.white;
+    public float streetlightIntensity = 5f;
+    public float streetlightRange = 15f;
+
+    private GameObject player;
+    private BladePickup bladePickup;
+    private bool playerNearby = false;
+    private bool bladeReturned = false;
+    private Light returnLight;
+
+    void Start()
+    {
+        // Find player
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        // Find blade if not assigned
+        if (blade == null)
+        {
+            blade = GameObject.Find("Blade");
+        }
+
+        // Get blade pickup script
+        if (blade != null)
+        {
+            bladePickup = blade.GetComponent<BladePickup>();
+        }
+
+        // Find message text if not assigned
+        if (messageText == null)
+        {
+            GameObject textObj = GameObject.Find("MessageText");
+            if (textObj != null)
+            {
+                messageText = textObj.GetComponent<TextMeshProUGUI>();
+            }
+        }
+
+        // Find lanterns parent if not assigned
+        if (lanternsParent == null)
+        {
+            lanternsParent = GameObject.Find("Lanterns");
+        }
+
+        // Find ground lanterns parent if not assigned
+        if (groundLanternsParent == null)
+        {
+            groundLanternsParent = GameObject.Find("GroundLanterns");
+        }
+
+        // Find House1 if not assigned
+        if (house1 == null)
+        {
+            house1 = GameObject.Find("House1");
+        }
+
+        // Find Box001 if not assigned
+        if (box001 == null)
+        {
+            box001 = GameObject.Find("Box001");
+        }
+
+        // Find streetlights parent if not assigned
+        if (streetlightsParent == null)
+        {
+            streetlightsParent = GameObject.Find("Streetlights");
+        }
+
+        // Turn off all lanterns and windows at start
+        if (lanternsParent != null)
+        {
+            TurnOffAllLanterns();
+            Debug.Log("Found lanterns parent with " + lanternsParent.transform.childCount + " children");
+        }
+
+        // Turn off ground lanterns at start
+        TurnOffGroundLanterns();
+
+        if (house1 != null)
+        {
+            TurnOffHouseWindows();
+            Debug.Log("Found House1");
+        }
+
+        if (box001 != null)
+        {
+            TurnOffBox001Windows();
+            Debug.Log("Found Box001");
+        }
+
+        // Turn ON streetlights at start
+        TurnOnStreetlights();
+
+        // Add a light to make return point visible
+        returnLight = gameObject.AddComponent<Light>();
+        returnLight.type = LightType.Point;
+        returnLight.color = Color.white;
+        returnLight.intensity = 5f;
+        returnLight.range = 15f;
+
+        Debug.Log("ReturnPoint initialized");
+    }
+
+    void TurnOffAllLanterns()
+    {
+        if (lanternsParent == null) return;
+
+        Light[] lights = lanternsParent.GetComponentsInChildren<Light>();
+        foreach (Light light in lights)
+        {
+            light.enabled = false;
+        }
+
+        Debug.Log("Turned off " + lights.Length + " paper lantern lights");
+    }
+
+    void TurnOffGroundLanterns()
+    {
+        Debug.Log("=== TURNING OFF GROUND LANTERNS ===");
+        List<GameObject> groundLanterns = new List<GameObject>();
+
+        // Method 1: If there's a parent object
+        if (groundLanternsParent != null)
+        {
+            Light[] lights = groundLanternsParent.GetComponentsInChildren<Light>();
+            foreach (Light light in lights)
+            {
+                light.enabled = false;
+            }
+
+            // Turn off emission
+            Renderer[] renderers = groundLanternsParent.GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer.material != null)
+                {
+                    renderer.material.DisableKeyword("_EMISSION");
+                }
+            }
+
+            Debug.Log("Turned off " + lights.Length + " ground lanterns from parent");
+            return;
+        }
+
+        // Method 2: Find all ground lanterns individually
+        GameObject lantern = GameObject.Find("Lantern");
+        if (lantern != null && !groundLanterns.Contains(lantern))
+        {
+            groundLanterns.Add(lantern);
+        }
+
+        for (int i = 1; i <= 100; i++)
+        {
+            string lanternName = "Lantern" + i.ToString("D3");
+            lantern = GameObject.Find(lanternName);
+
+            if (lantern != null && !groundLanterns.Contains(lantern))
+            {
+                groundLanterns.Add(lantern);
+            }
+
+            lanternName = "Lantern" + i.ToString();
+            lantern = GameObject.Find(lanternName);
+
+            if (lantern != null && !groundLanterns.Contains(lantern))
+            {
+                groundLanterns.Add(lantern);
+            }
+        }
+
+        // Turn off all found ground lanterns
+        foreach (GameObject gl in groundLanterns)
+        {
+            Light[] lights = gl.GetComponentsInChildren<Light>();
+            foreach (Light light in lights)
+            {
+                light.enabled = false;
+            }
+
+            Renderer[] renderers = gl.GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer.material != null)
+                {
+                    renderer.material.DisableKeyword("_EMISSION");
+                }
+            }
+        }
+
+        Debug.Log("Turned off " + groundLanterns.Count + " ground lanterns");
+    }
+
+    void TurnOffHouseWindows()
+    {
+        if (house1 == null) return;
+
+        Debug.Log("=== TURNING OFF HOUSE1 WINDOWS ===");
+
+        // Turn off all lights in House1
+        Light[] lights = house1.GetComponentsInChildren<Light>();
+        foreach (Light light in lights)
+        {
+            light.enabled = false;
+        }
+
+        // Find and turn off emission on element2
+        Transform element2Transform = house1.transform.Find("element2");
+        if (element2Transform == null)
+        {
+            foreach (Transform child in house1.transform)
+            {
+                if (child.name.ToLower().Contains("element2"))
+                {
+                    element2Transform = child;
+                    break;
+                }
+            }
+        }
+
+        if (element2Transform != null)
+        {
+            Renderer element2Renderer = element2Transform.GetComponent<Renderer>();
+            if (element2Renderer != null && element2Renderer.material != null)
+            {
+                element2Renderer.material.DisableKeyword("_EMISSION");
+            }
+        }
+
+        // Turn off emission on all renderers
+        Renderer[] renderers = house1.GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            if (renderer.material != null)
+            {
+                renderer.material.DisableKeyword("_EMISSION");
+            }
+        }
+
+        Debug.Log("Turned off " + lights.Length + " lights in House1");
+    }
+
+    void TurnOffBox001Windows()
+    {
+        if (box001 == null) return;
+
+        Debug.Log("=== TURNING OFF BOX001 WINDOWS ===");
+
+        Light[] lights = box001.GetComponentsInChildren<Light>();
+        foreach (Light light in lights)
+        {
+            light.enabled = false;
+        }
+
+        Renderer[] renderers = box001.GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+        {
+            if (renderer.material != null)
+            {
+                renderer.material.DisableKeyword("_EMISSION");
+            }
+        }
+
+        Debug.Log("Turned off Box001 windows");
+    }
+
+    void TurnOnStreetlights()
+    {
+        Debug.Log("=== TURNING ON STREETLIGHTS (BRIGHT WHITE) ===");
+        List<GameObject> streetlights = new List<GameObject>();
+
+        // Method 1: If there's a parent object
+        if (streetlightsParent != null)
+        {
+            Light[] lights = streetlightsParent.GetComponentsInChildren<Light>(true);
+            foreach (Light light in lights)
+            {
+                light.enabled = true;
+                light.color = streetlightColor;
+                light.intensity = streetlightIntensity;
+                light.range = streetlightRange;
+                light.type = LightType.Point;
+                light.shadows = LightShadows.Soft;
+            }
+
+            Renderer[] renderers = streetlightsParent.GetComponentsInChildren<Renderer>(true);
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer.material != null)
+                {
+                    renderer.material.EnableKeyword("_EMISSION");
+                    renderer.material.SetColor("_EmissionColor", Color.white * 3f);
+                }
+            }
+
+            Debug.Log("Turned on " + lights.Length + " streetlights from parent");
+            return;
+        }
+
+        // Method 2: Find individually
+        for (int i = 1; i <= 100; i++)
+        {
+            string lightName = "Kyoto_Streetlight" + i.ToString("D3");
+            GameObject streetlight = GameObject.Find(lightName);
+
+            if (streetlight != null && !streetlights.Contains(streetlight))
+            {
+                streetlights.Add(streetlight);
+            }
+
+            lightName = "Kyoto_Streetlight" + i.ToString();
+            streetlight = GameObject.Find(lightName);
+
+            if (streetlight != null && !streetlights.Contains(streetlight))
+            {
+                streetlights.Add(streetlight);
+            }
+        }
+
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.name.ToLower().Contains("streetlight") && !streetlights.Contains(obj))
+            {
+                streetlights.Add(obj);
+            }
+        }
+
+        int lightsActivated = 0;
+        foreach (GameObject streetlight in streetlights)
+        {
+            Light[] lights = streetlight.GetComponentsInChildren<Light>(true);
+            foreach (Light light in lights)
+            {
+                light.enabled = true;
+                light.color = streetlightColor;
+                light.intensity = streetlightIntensity;
+                light.range = streetlightRange;
+                light.type = LightType.Point;
+                light.shadows = LightShadows.Soft;
+                lightsActivated++;
+            }
+
+            Renderer[] renderers = streetlight.GetComponentsInChildren<Renderer>(true);
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer.material != null)
+                {
+                    renderer.material.EnableKeyword("_EMISSION");
+                    renderer.material.SetColor("_EmissionColor", Color.white * 3f);
+                }
+            }
+        }
+
+        Debug.Log("Activated " + streetlights.Count + " streetlights with " + lightsActivated + " lights");
+    }
+
+    void TurnOnAllLanterns()
+    {
+        if (lanternsParent == null)
+        {
+            Debug.LogError("Cannot turn on paper lanterns - parent not found!");
+        }
+        else
+        {
+            Debug.Log("=== TURNING ON ALL PAPER LANTERNS ===");
+
+            Light[] lights = lanternsParent.GetComponentsInChildren<Light>(true);
+
+            foreach (Light light in lights)
+            {
+                light.enabled = true;
+                if (light.intensity < 1f)
+                {
+                    light.intensity = 2f;
+                }
+            }
+
+            Renderer[] renderers = lanternsParent.GetComponentsInChildren<Renderer>(true);
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer.material != null)
+                {
+                    renderer.material.EnableKeyword("_EMISSION");
+                    renderer.material.SetColor("_EmissionColor", Color.yellow * 2f);
+                }
+            }
+
+            Debug.Log("Activated " + lights.Length + " paper lantern lights!");
+        }
+    }
+
+    void TurnOnGroundLanterns()
+    {
+        Debug.Log("=== TURNING ON GROUND LANTERNS (SAME AS BOX001) ===");
+        List<GameObject> groundLanterns = new List<GameObject>();
+
+        Color brightYellow = new Color(1f, 0.95f, 0.7f); // Bright yellow/white
+
+        // Method 1: If there's a parent object
+        if (groundLanternsParent != null)
+        {
+            Light[] lights = groundLanternsParent.GetComponentsInChildren<Light>(true);
+            foreach (Light light in lights)
+            {
+                light.enabled = true;
+                light.color = brightYellow;
+                light.intensity = 10f; // Very bright
+                light.range = 15f; // Increased range
+                light.type = LightType.Point;
+            }
+
+            Renderer[] renderers = groundLanternsParent.GetComponentsInChildren<Renderer>(true);
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer.material != null)
+                {
+                    renderer.enabled = true;
+
+                    // Enable emission (same as Box001)
+                    renderer.material.EnableKeyword("_EMISSION");
+                    renderer.material.SetColor("_EmissionColor", brightYellow * 4f);
+
+                    // Set base color
+                    Color baseColor = renderer.material.GetColor("_BaseColor");
+                    if (baseColor != null)
+                    {
+                        renderer.material.SetColor("_BaseColor", brightYellow);
+                    }
+                }
+            }
+
+            Debug.Log("Turned on " + lights.Length + " ground lanterns (same style as Box001)");
+            return;
+        }
+
+        // Method 2: Find all ground lanterns individually
+        GameObject lantern = GameObject.Find("Lantern");
+        if (lantern != null && !groundLanterns.Contains(lantern))
+        {
+            groundLanterns.Add(lantern);
+        }
+
+        for (int i = 1; i <= 100; i++)
+        {
+            string lanternName = "Lantern" + i.ToString("D3");
+            lantern = GameObject.Find(lanternName);
+
+            if (lantern != null && !groundLanterns.Contains(lantern))
+            {
+                groundLanterns.Add(lantern);
+            }
+
+            lanternName = "Lantern" + i.ToString();
+            lantern = GameObject.Find(lanternName);
+
+            if (lantern != null && !groundLanterns.Contains(lantern))
+            {
+                groundLanterns.Add(lantern);
+            }
+        }
+
+        int lightsActivated = 0;
+        foreach (GameObject gl in groundLanterns)
+        {
+            Light[] lights = gl.GetComponentsInChildren<Light>(true);
+            foreach (Light light in lights)
+            {
+                light.enabled = true;
+                light.color = brightYellow;
+                light.intensity = 10f;
+                light.range = 15f;
+                light.type = LightType.Point;
+                lightsActivated++;
+            }
+
+            Renderer[] renderers = gl.GetComponentsInChildren<Renderer>(true);
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer.material != null)
+                {
+                    renderer.enabled = true;
+
+                    // Enable emission (same as Box001)
+                    renderer.material.EnableKeyword("_EMISSION");
+                    renderer.material.SetColor("_EmissionColor", brightYellow * 4f);
+
+                    // Set base color
+                    Color baseColor = renderer.material.GetColor("_BaseColor");
+                    if (baseColor != null)
+                    {
+                        renderer.material.SetColor("_BaseColor", brightYellow);
+                    }
+                }
+            }
+        }
+
+        Debug.Log("Activated " + groundLanterns.Count + " ground lanterns with " + lightsActivated + " lights (same style as Box001)!");
+    }
+
+    void TurnOnHouseWindows()
+    {
+        if (house1 == null)
+        {
+            Debug.LogWarning("House1 not found!");
+            return;
+        }
+
+        Debug.Log("=== TURNING ON HOUSE1 WINDOWS (SAME AS BOX001) ===");
+
+        // Turn on all lights in House1
+        Light[] lights = house1.GetComponentsInChildren<Light>(true);
+        foreach (Light light in lights)
+        {
+            light.enabled = true;
+            light.color = windowGlowColor; // Same as Box001
+            if (light.intensity < 2f)
+            {
+                light.intensity = 3f; // Same as Box001
+            }
+        }
+
+        // Get all renderers in House1
+        Renderer[] renderers = house1.GetComponentsInChildren<Renderer>(true);
+        int windowCount = 0;
+
+        foreach (Renderer renderer in renderers)
+        {
+            if (renderer.material != null)
+            {
+                string materialName = renderer.material.name.ToLower();
+                string objectName = renderer.gameObject.name.ToLower();
+
+                // Check for window, glass, or element2 (element2 is the window object in House1)
+                if (materialName.Contains("window") || materialName.Contains("glass") || objectName.Contains("element2"))
+                {
+                    // Enable emission
+                    renderer.material.EnableKeyword("_EMISSION");
+                    renderer.material.SetColor("_EmissionColor", windowGlowColor * windowGlowIntensity);
+
+                    // Set base color
+                    Color baseColor = renderer.material.GetColor("_BaseColor");
+                    if (baseColor != null)
+                    {
+                        renderer.material.SetColor("_BaseColor", windowGlowColor);
+                    }
+
+                    windowCount++;
+                    Debug.Log("Activated window material in House1: " + materialName + " (object: " + renderer.gameObject.name + ")");
+                }
+            }
+        }
+
+        Debug.Log("Activated " + windowCount + " window materials in House1 (same style as Box001)!");
+    }
+
+    void TurnOnBox001Windows()
+    {
+        if (box001 == null)
+        {
+            Debug.LogWarning("Box001 not found!");
+            return;
+        }
+
+        Debug.Log("=== TURNING ON BOX001 WINDOWS (SAME AS HOUSE1) ===");
+
+        // Turn on all lights in Box001
+        Light[] lights = box001.GetComponentsInChildren<Light>(true);
+        foreach (Light light in lights)
+        {
+            light.enabled = true;
+            light.color = windowGlowColor; // Same as House1
+            if (light.intensity < 2f)
+            {
+                light.intensity = 3f; // Same as House1
+            }
+        }
+
+        // Get all renderers in Box001
+        Renderer[] renderers = box001.GetComponentsInChildren<Renderer>(true);
+        int windowCount = 0;
+
+        foreach (Renderer renderer in renderers)
+        {
+            if (renderer.material != null)
+            {
+                string materialName = renderer.material.name.ToLower();
+
+                // Only affect materials with "window" or "glass" in the name (same as House1)
+                if (materialName.Contains("window") || materialName.Contains("glass"))
+                {
+                    // Enable emission
+                    renderer.material.EnableKeyword("_EMISSION");
+                    renderer.material.SetColor("_EmissionColor", windowGlowColor * windowGlowIntensity);
+
+                    // Set base color
+                    Color baseColor = renderer.material.GetColor("_BaseColor");
+                    if (baseColor != null)
+                    {
+                        renderer.material.SetColor("_BaseColor", windowGlowColor);
+                    }
+
+                    windowCount++;
+                    Debug.Log("Activated window material in Box001: " + materialName);
+                }
+            }
+        }
+
+        Debug.Log("Activated " + windowCount + " window materials in Box001 (same style as House1)!");
+    }
+
+    void Update()
+    {
+        if (player == null || bladeReturned) return;
+
+        float distance = Vector3.Distance(player.transform.position, transform.position);
+
+        if (distance <= detectionRadius)
+        {
+            if (!playerNearby)
+            {
+                playerNearby = true;
+            }
+
+            if (bladePickup != null && bladePickup.HasBlade())
+            {
+                if (messageText != null)
+                {
+                    messageText.text = "Press E to return the blade";
+                }
+
+                if (Input.GetKeyDown(returnKey))
+                {
+                    ReturnBlade();
+                }
+            }
+            else
+            {
+                if (messageText != null && !bladeReturned)
+                {
+                    messageText.text = "Find the blade first!";
+                }
+            }
+        }
+        else
+        {
+            if (playerNearby)
+            {
+                playerNearby = false;
+                if (messageText != null && !bladeReturned)
+                {
+                    messageText.text = "";
+                }
+            }
+        }
+    }
+
+    void ReturnBlade()
+    {
+        bladeReturned = true;
+        Debug.Log("Blade returned successfully!");
+
+        if (blade != null)
+        {
+            blade.transform.SetParent(null);
+            blade.transform.position = transform.position + Vector3.up * 0.3f;
+            blade.transform.rotation = Quaternion.Euler(-90, 0, (float)-174.239);
+
+            Renderer bladeRenderer = blade.GetComponent<Renderer>();
+            if (bladeRenderer != null)
+            {
+                bladeRenderer.enabled = true;
+            }
+
+            Collider bladeCollider = blade.GetComponent<Collider>();
+            if (bladeCollider != null)
+            {
+                bladeCollider.enabled = true;
+            }
+
+            Light bladeLight = blade.GetComponent<Light>();
+            if (bladeLight != null)
+            {
+                bladeLight.enabled = true;
+                bladeLight.color = Color.green;
+                bladeLight.intensity = 4f;
+            }
+
+            if (bladePickup != null)
+            {
+                bladePickup.enabled = false;
+            }
+
+            RotateBlade rotateScript = blade.GetComponent<RotateBlade>();
+            if (rotateScript != null)
+            {
+                rotateScript.enabled = false;
+            }
+        }
+
+        // Turn on ALL lights!
+        TurnOnAllLanterns(); // Paper lanterns
+        TurnOnGroundLanterns(); // Ground/stair lanterns
+        TurnOnHouseWindows(); // House1 windows
+        TurnOnBox001Windows(); // Box001 windows (NEW!)
+
+        if (messageText != null)
+        {
+            messageText.text = "Thank you! The festival can begin!";
+            Invoke("ClearMessage", 5f);
+        }
+
+        StartCoroutine(CelebrationEffect());
+    }
+
+    IEnumerator CelebrationEffect()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (returnLight != null)
+            {
+                returnLight.intensity = 10f;
+            }
+            yield return new WaitForSeconds(0.2f);
+
+            if (returnLight != null)
+            {
+                returnLight.intensity = 5f;
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
+
+    void ClearMessage()
+    {
+        if (messageText != null)
+        {
+            messageText.text = "";
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+}
