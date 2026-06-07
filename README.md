@@ -202,6 +202,3 @@ Special thanks to:
 
 ---
 
-<p align="center">
-  Made with ❤️ and Unity
-</p>
