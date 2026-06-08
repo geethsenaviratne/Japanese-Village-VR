@@ -1,5 +1,9 @@
 # Japanese Village VR — *Festival of Eternal Light*
 
+![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?logo=unity&logoColor=white)
+![URP](https://img.shields.io/badge/Render%20Pipeline-URP-blue)
+
+
 <p align="center">
   <img src="https://github.com/geethsenaviratne/Japanese-Village-VR/blob/main/Japanese%20Village%20VR%20-%20GV/Assets/Images/japanese_village_banner.png?raw=true" width="720" alt="Japanese Village VR Preview">
 </p>
