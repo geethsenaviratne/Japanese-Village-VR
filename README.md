@@ -1,7 +1,5 @@
 # Japanese Village VR — *Festival of Eternal Light*
-
-![Unity](https://img.shields.io/badge/Unity-2021.3%2B-black?logo=unity&logoColor=white)
-![URP](https://img.shields.io/badge/Render%20Pipeline-URP-blue)
+![Unity](https://img.shields.io/badge/Built%20with-Unity-black?logo=unity&logoColor=white)
 
 
 <p align="center">
